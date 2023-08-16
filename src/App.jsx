@@ -210,7 +210,6 @@ Hero.propTypes = {
 
 function HourlyForecast({ searchTerm, unit }) {
   const [hourModules, setModules] = useState([]);
-  const [scroll, setScroll] = useState(0);
 
   if (fetched > fetchLimit) {
     throw new Error("fetched too many times");
@@ -247,10 +246,12 @@ function HourlyForecast({ searchTerm, unit }) {
         setModules(hourModTemp);
       });
   }
-
-  function HourlyForecast({ scrollf }) {
-    return (
-      <div className="hourlyForecast" onScroll={scrollf}>
+  return (
+    <div className="hourlyForecastContainer">
+      <div className="tooltip">
+        <h4>Hourly Forecast</h4>
+      </div>
+      <div className="hourlyForecast">
         {hourModules.map((mod) => (
           <HourlyModule
             unit={unit}
@@ -259,30 +260,6 @@ function HourlyForecast({ searchTerm, unit }) {
           ></HourlyModule>
         ))}
       </div>
-    );
-  }
-  function Scrollbar() {
-    return (
-      <div className="hourlyScrollbar">
-        <div className="hourlyScrollbarContent"></div>
-      </div>
-    );
-  }
-  return (
-    <div className="hourlyForecastContainer">
-      <div className="tooltip">
-        <h4>Hourly Forecast</h4>
-      </div>
-      <HourlyForecast
-        scrollf={(e) => {
-          setScroll(e.target.scrollLeft);
-        }}
-      ></HourlyForecast>
-      <Scrollbar
-        scrollf={(e) => {
-          setScroll(e.target.scrollLeft);
-        }}
-      ></Scrollbar>
     </div>
   );
 }
