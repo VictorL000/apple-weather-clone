@@ -195,6 +195,7 @@ body .temperature {
   overflow-y: hidden;
   padding: 3px 0px 6px;
   /* gap: 66px; */
+  margin: 0px 30px;
 }
 
 .hourlyForecast::-webkit-scrollbar-thumb {
@@ -224,7 +225,7 @@ body .temperature {
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  margin: 0px 30px;
+  /* margin: 0px 30px; */
 }
 
 .hourModule img {
