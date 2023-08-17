@@ -5,9 +5,70 @@ import PropTypes from "prop-types";
 const FORECASTDAYS = 7;
 const CITY = "toronto-ontario-canada";
 const API_KEY = "398c0c5661ba432481b11820231008";
-let fetched = 0;
-let fetchLimit = 20;
 const SEARCHTIMEOUTMS = 300;
+
+function convert24to12(time) {
+  if (time === "Now") return time;
+  return (
+    <>
+      {time % 12 === 0 ? "12" : time % 12}
+      <span className="ampm">{time < 12 ? "AM" : "PM"}</span>
+    </>
+  );
+  // return (time % 12) + "" +
+}
+
+const bgLookup = {
+  1000: 'url(/src/assets/sunny.jpg)',
+  1001: 'url(/src/assets/clear.jpg)',
+  1003: 'url(/src/assets/cloudy.jpg)',
+  1006: 'url(/src/assets/cloudy.jpg)',
+  1009: 'url(/src/assets/cloudy.jpg)',
+  1030: 'url(/src/assets/cloudy.jpg)',
+  1063: 'url(/src/assets/sunny.jpg)',
+  1066: 'url(/src/assets/cloudy.jpg)',
+  1069: 'url(/src/assets/cloudy.jpg)',
+  1072: 'url(/src/assets/cloudy.jpg)',
+  1087: 'url(/src/assets/cloudy.jpg)',
+  1114: 'url(/src/assets/rainy.jpg)',
+  1117: 'url(/src/assets/snowy.jpg)',
+  1135: 'url(/src/assets/cloudy.jpg)',
+  1147: 'url(/src/assets/cloudy.jpg)',
+  1150: 'url(/src/assets/rainy.jpg)',
+  1153: 'url(/src/assets/rainy.jpg)',
+  1168: 'url(/src/assets/rainy.jpg)',
+  1171: 'url(/src/assets/rainy.jpg)',
+  1180: 'url(/src/assets/rainy.jpg)',
+  1183: 'url(/src/assets/rainy.jpg)',
+  1186: 'url(/src/assets/rainy.jpg)',
+  1189: 'url(/src/assets/rainy.jpg)',
+  1192: 'url(/src/assets/rainy.jpg)',
+  1195: 'url(/src/assets/rainy.jpg)',
+  1198: 'url(/src/assets/rainy.jpg)',
+  1201: 'url(/src/assets/rainy.jpg)',
+  1204: 'url(/src/assets/snowy.jpg)',
+  1207: 'url(/src/assets/snowy.jpg)',
+  1210: 'url(/src/assets/snowy.jpg)',
+  1213: 'url(/src/assets/snowy.jpg)',
+  1216: 'url(/src/assets/snowy.jpg)',
+  1219: 'url(/src/assets/snowy.jpg)',
+  1222: 'url(/src/assets/snowy.jpg)',
+  1225: 'url(/src/assets/snowy.jpg)',
+  1237: 'url(/src/assets/snowy.jpg)',
+  1240: 'url(/src/assets/rainy.jpg)',
+  1243: 'url(/src/assets/rainy.jpg)',
+  1246: 'url(/src/assets/rainy.jpg)',
+  1249: 'url(/src/assets/rainy.jpg)',
+  1252: 'url(/src/assets/rainy.jpg)',
+  1255: 'url(/src/assets/sunny.jpg)',
+  1258: 'url(/src/assets/sunny.jpg)',
+  1261: 'url(/src/assets/sunny.jpg)',
+  1264: 'url(/src/assets/sunny.jpg)',
+  1273: 'url(/src/assets/rainy.jpg)',
+  1276: 'url(/src/assets/rainy.jpg)',
+  1279: 'url(/src/assets/snowy.jpg)',
+  1282: 'url(/src/assets/snowy.jpg)'
+};
 
 function App() {
   let [unit, setUnit] = useState("c");
@@ -27,7 +88,9 @@ function Navbar({ unit, setUnit, setSearchTerm }) {
     <>
       <div className="navbarBG"></div>
       <div className="navbar">
-        <div className="logo">Weather</div>
+        <div className="logo">
+          <img src="/src/assets/favicon.ico" />
+        </div>
         <SearchBar setSearchTerm={setSearchTerm}></SearchBar>
         <CFButton unit={unit} setUnit={setUnit}></CFButton>
       </div>
@@ -161,6 +224,8 @@ function Hero({ searchTerm, unit }) {
         return response.json();
       })
       .then((response) => {
+        // If its "sunny" and nighttime, set code to 1001
+        changeBG(response.current.condition.code === 1000 && response.current.is_day === 0 ? 1001 : response.current.condition.code);
         console.log("hero fetch " + searchTerm);
         setCurrentTempCondition({
           searchTerm,
@@ -211,9 +276,6 @@ Hero.propTypes = {
 function HourlyForecast({ searchTerm, unit }) {
   const [hourModules, setModules] = useState([]);
 
-  if (fetched > fetchLimit) {
-    throw new Error("fetched too many times");
-  }
   if (hourModules.length === 0 || hourModules[0].searchTerm !== searchTerm) {
     fetch(
       `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${searchTerm}&days=${FORECASTDAYS}`,
@@ -226,7 +288,6 @@ function HourlyForecast({ searchTerm, unit }) {
         let current = new Date(response.current.last_updated);
         let currentHour = current.getHours();
         console.log("Hourly forecast fetched");
-        fetched++;
         let hourModTemp = [];
 
         response.forecast.forecastday[0].hour
@@ -249,7 +310,7 @@ function HourlyForecast({ searchTerm, unit }) {
   return (
     <div className="hourlyForecastContainer">
       <div className="tooltip">
-        <h4>Hourly Forecast</h4>
+        <h4>HOURLY FORECAST</h4>
       </div>
       <div className="hourlyForecast">
         {hourModules.map((mod) => (
@@ -272,7 +333,7 @@ HourlyForecast.propTypes = {
 function HourlyModule(props) {
   return (
     <div className="hourModule">
-      <h3>{props.weather.time}</h3>
+      <h3>{convert24to12(props.weather.time)}</h3>
       <img src={"http:" + props.weather.conditionSrc} alt={props.weather.condition} />
       <h3>{Math.round(props.weather.temp)}°</h3>
     </div>
@@ -303,9 +364,6 @@ HourlyModule.defaultProps = {
 function DailyForecast({ searchTerm, unit }) {
   const [dayModules, setDayModules] = useState([]);
 
-  if (fetched > fetchLimit) {
-    throw new Error("fetched too many times");
-  }
   if (dayModules.length === 0 || dayModules[0].searchTerm !== searchTerm) {
     fetch(
       `https://api.weatherapi.com/v1/forecast.json?key=${API_KEY}&q=${searchTerm}&days=${FORECASTDAYS}`,
@@ -353,20 +411,25 @@ function DailyForecast({ searchTerm, unit }) {
       });
   }
   return (
-    <div className="dailyForecast">
-      {dayModules.map((mod) => (
-        <DailyModule
-          key={mod.date}
-          weather={{
-            ...mod,
-            low: unit === "c" ? mod.low_c : mod.low_f,
-            high: unit === "c" ? mod.high_c : mod.high_f,
-            weekLow: unit === "c" ? mod.weekLow_c : mod.weekLow_f,
-            weekHigh: unit === "c" ? mod.weekHigh_c : mod.weekHigh_f,
-            temp: unit === "c" ? mod.temp_c : mod.temp_f,
-          }}
-        ></DailyModule>
-      ))}
+    <div className="dailyForecastContainer">
+      <div className="tooltip">
+        <h4>8-DAY FORECAST</h4>
+      </div>
+      <div className="dailyForecast">
+        {dayModules.map((mod) => (
+          <DailyModule
+            key={mod.date}
+            weather={{
+              ...mod,
+              low: unit === "c" ? mod.low_c : mod.low_f,
+              high: unit === "c" ? mod.high_c : mod.high_f,
+              weekLow: unit === "c" ? mod.weekLow_c : mod.weekLow_f,
+              weekHigh: unit === "c" ? mod.weekHigh_c : mod.weekHigh_f,
+              temp: unit === "c" ? mod.temp_c : mod.temp_f,
+            }}
+          ></DailyModule>
+        ))}
+      </div>
     </div>
   );
 }
@@ -405,7 +468,7 @@ function DailyModule(props) {
           >
             {props.weather.date === "Today" ? (
               <div className="curTempIconContainer" style={{ left: `${iconLeftPercent}%` }}>
-                <img src="/src/assets/react.svg" alt="" />
+                <img src="/src/assets/circle.svg" alt="" />
               </div>
             ) : (
               ""
@@ -474,4 +537,9 @@ CFButton.propTypes = {
   setUnit: PropTypes.func,
   setSearchTerm: PropTypes.func,
 };
+
+function changeBG(code) {
+  document.querySelector('html').style.backgroundImage = bgLookup[code];
+}
+
 export default App;

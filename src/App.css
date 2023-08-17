@@ -15,7 +15,9 @@ h1, h2, h3, h4, h5, h6 {
 
 h3 {
   font-size: 32px;
+  font-size: clamp(1.375rem, 0.9583333333333334rem + 1.8518518518518516vw, 2rem);
   font-weight: 500;
+  color: white;
   /* font-size: clamp(1rem, 0.95rem + 0.25vw, 1.25rem); */
 }
 
@@ -26,6 +28,7 @@ h3 {
   text-align: center;
   --max-content-width: min(90vw, 800px);
   --border-radius: 25px;
+  --lrpadding: min(30px, 3.73vw)
 }
 
 body {
@@ -34,11 +37,20 @@ body {
 }
 
 html {
-  background: url(assets/cloudy2.jpg) no-repeat center center fixed;
+  background: no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  background-position-y: top;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+.logo img {
+  height: 30px;
 }
 
 .navbar {
@@ -56,10 +68,11 @@ html {
 .navbarBG{
   z-index: -1;
   opacity: 0.8;
-  background-color: #fff;
+  background-color: #ffffff33;
   width: 100vw;
   height: 54px;
   position: absolute;
+  backdrop-filter: blur(6px);
 }
 
 
@@ -78,7 +91,7 @@ input[type="checkbox"] {
   cursor: pointer;
   width: 56px;
   height: 32px;
-  background: grey;
+  background: #999999bb;
   display: block;
   border-radius: 100px;
   position: relative;
@@ -88,6 +101,7 @@ input[type="checkbox"] {
 .toggleCF label::after {
   font-size: 16px;
   color: #000000;
+  font-weight: 500;
   content: "C";
   line-height: 26px;
   text-align: center;
@@ -103,7 +117,7 @@ input[type="checkbox"] {
 
 
 input:checked + label {
-  background: grey;
+  background: #999999bb;
 }
 
 input:checked + :after {
@@ -131,6 +145,7 @@ input:checked + :after {
 
 .hero {
   margin: 60px;
+  text-shadow: 3px 3px 12px #00000063;
 }
 
 .hero h1,
@@ -172,20 +187,24 @@ body .temperature {
   max-width: var(--max-content-width);
   text-align: left;
   margin: 0 auto;
-  background-color: lightgray;
+  background-color: #55555533;
   border-radius: var(--border-radius);
   padding: 6px 0px 0px;
+  backdrop-filter: blur(6px);
 }
 
 .tooltip {
-  margin: 12px 30px 0px;
+  margin: 12px 30px 0px 0px;
+  padding-left: var(--lrpadding);
   padding-bottom: 8px;
-  border-bottom: 1px solid black;
 }
 
 .tooltip h4 {
+  color: #ffffff99;
   margin: 0;
   font-size: 20px;
+  font-size: clamp(1rem, 0.8333333333333333rem + 0.7407407407407408vw, 1.25rem);
+  font-weight: 500;
 }
 
 .hourlyForecast {
@@ -194,8 +213,9 @@ body .temperature {
   overflow: scroll;
   overflow-y: hidden;
   padding: 3px 0px 6px;
-  /* gap: 66px; */
-  margin: 0px 30px;
+  gap: clamp(1rem, -0.41666666666666674rem + 6.296296296296297vw, 3.125rem);
+  margin: 0px var(--lrpadding);
+  border-top: 1px solid #eeeeee55;
 }
 
 .hourlyForecast::-webkit-scrollbar-thumb {
@@ -217,7 +237,7 @@ body .temperature {
 }
 
 .hourModule {
-  flex: 0 0 6.25vw;
+  /* flex: 0 0 6.25vw; */
   color: black;
   /* padding: 0px 30px; */
   height: auto;
@@ -230,22 +250,30 @@ body .temperature {
 
 .hourModule img {
   height: 64px;
-  width: 64px;
+  height: clamp(2.5rem, 1.5rem + 4.444444444444445vw, 4rem); 
 }
 
 .hourModule * {
   margin: 0px;
 }
 
+.dailyForecastContainer {
+  max-width: var(--max-content-width);
+  text-align: left;
+  margin: 0 auto;
+  background-color: #55555533;
+  border-radius: var(--border-radius);
+  margin: 15px auto 45px;
+  padding: 6px 0px 8px;
+  backdrop-filter: blur(6px);
+}
+
 .dailyForecast {
   max-width: var(--max-content-width);
   /* height: 600px; */
-  background-color: lightgrey;
-  margin: 15px auto;
-  border-radius: var(--border-radius);
   display: flex;
   flex-direction: column;
-  padding: 15px 35px;
+  padding: 0px var(--lrpadding);
   gap: 10px;
 }
 
@@ -256,10 +284,11 @@ body .temperature {
   gap: 20px;
   justify-content: space-between;
   align-items: center;
+  border-top: 1px solid #eeeeee55;
 }
 
 .dayModule > :nth-child(1){
-  width: 20%;
+  width: 31%;
   text-align: left;
 }
 
@@ -267,17 +296,29 @@ body .temperature {
   width: 21%;
   /* height: 64px; */
 }
+.imgContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.imgContainer img{
+  height: clamp(2.5rem, 1.5rem + 4.444444444444445vw, 4rem); 
+}
 
 .weatherBar {
   display: flex;
   flex: 1 1 auto;
-  gap: 10px;
+  /* gap: 10px; */
   align-items: center;
   min-width: 156px;
   height: 100%;
 }
+.weatherBar :nth-child(3){
+  text-align: right;
+}
 .weatherBar > h3 {
-  width: 60px;
+  width: 2.5rem;
+  width: clamp(2.5rem, 1.6666666666666667rem + 3.7037037037037033vw, 3.75rem);
 }
 
 .weatherBarBG {
@@ -303,9 +344,10 @@ body .temperature {
   align-items: center;
   position: relative;
 }
+
 .curTempIconContainer img {
-  height: 19px;
-  width: 19px;
+  height: 14px;
+  width: 14px;
 }
 
 .resultsbg {
@@ -320,16 +362,17 @@ body .temperature {
   flex: 0 1 350px;
   margin: 0px 12px;
   align-self: flex-start;
+  height: 30px;
 }
 
 #searchbar {
   /* THE ACTUAL INPUT ELEMENT */
   border-radius: 30px;
-  background-color: grey;
+  background-color: #00000022;
   padding-left: 16px;
   width: 100%;
   height: 100%;
-  background: url(/src/assets/search.svg) no-repeat scroll;
+  /* background: url(/src/assets/search.svg) no-repeat scroll; */
   background-size: 23px;
   padding-right: 30px;
   background-position: right;
@@ -340,7 +383,7 @@ body .temperature {
   text-align: left;
   height: 100%;
   height: 30px;
-  border: 2px solid #eee; /* Here */
+  border: 2px solid #eeeeeeee;
 }
 
 .searchBar button {
@@ -354,4 +397,9 @@ body .temperature {
   height: 23px;
   margin-left: -35px;
   user-select: none;
+}
+
+.ampm {
+  font-size: 1.125rem;
+  font-size: clamp(1.125rem, 0.75rem + 1.6666666666666667vw, 1.6875rem);
 }
