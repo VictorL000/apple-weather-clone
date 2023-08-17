@@ -1,6 +1,8 @@
 import { useState } from "react";
 import "./App.css";
 import PropTypes from "prop-types";
+import clearImg from "./assets/clear.jpg"
+import icon from "./assets/favicon.ico"
 
 const FORECASTDAYS = 7;
 const CITY = "toronto-ontario-canada";
@@ -20,7 +22,7 @@ function convert24to12(time) {
 
 const bgLookup = {
   1000: 'url(/src/assets/sunny.jpg)',
-  1001: 'url(/src/assets/clear.jpg)',
+  1001: 'url(' + clearImg + ')',
   1003: 'url(/src/assets/cloudy.jpg)',
   1006: 'url(/src/assets/cloudy.jpg)',
   1009: 'url(/src/assets/cloudy.jpg)',
@@ -89,7 +91,7 @@ function Navbar({ unit, setUnit, setSearchTerm }) {
       <div className="navbarBG"></div>
       <div className="navbar">
         <div className="logo">
-          <img src="/src/assets/favicon.ico" />
+          <img src={icon} />
         </div>
         <SearchBar setSearchTerm={setSearchTerm}></SearchBar>
         <CFButton unit={unit} setUnit={setUnit}></CFButton>
@@ -539,6 +541,7 @@ CFButton.propTypes = {
 };
 
 function changeBG(code) {
+  console.log(bgLookup[code]);
   document.querySelector('html').style.backgroundImage = bgLookup[code];
 }
 
