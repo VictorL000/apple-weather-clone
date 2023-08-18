@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "push-to-pages": "vite build; git add dist -f; git commit -m 'adding dist'; git subtree push --prefix dist origin gh-pages"
   },
   "dependencies": {
     "normalize.css": "^8.0.1",

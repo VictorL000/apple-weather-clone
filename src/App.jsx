@@ -1,13 +1,13 @@
 import { useState } from "react";
 import "./App.css";
 import PropTypes from "prop-types";
-import clearImg from "./assets/clear.jpg"
-import sunnyImg from "./assets/sunny.jpg"
-import rainyImg from "./assets/rainy.jpg"
-import snowyImg from "./assets/snowy.jpg"
-import cloudyImg from "./assets/cloudy.jpg"
-import icon from "./assets/favicon.ico"
-import circleImg from "./assets/circle.svg"
+import clearImg from "./assets/clear2.jpg";
+import sunnyImg from "./assets/sunny.jpg";
+import rainyImg from "./assets/rainy.jpg";
+import snowyImg from "./assets/snowy.jpg";
+import cloudyImg from "./assets/cloudy.jpg";
+import icon from "./assets/favicon.ico";
+import circleImg from "./assets/circle.svg";
 
 const FORECASTDAYS = 7;
 const CITY = "toronto-ontario-canada";
@@ -25,55 +25,55 @@ function convert24to12(time) {
 }
 
 const bgLookup = {
-  1000: `url(${ sunnyImg } )`,
-  1001: `url(${ clearImg } )`,
-  1003: `url(${ cloudyImg } )`,
-  1006: `url(${ cloudyImg } )`,
-  1009: `url(${ cloudyImg } )`,
-  1030: `url(${ cloudyImg } )`,
-  1063: `url(${ sunnyImg } )`,
-  1066: `url(${ cloudyImg } )`,
-  1069: `url(${ cloudyImg } )`,
-  1072: `url(${ cloudyImg } )`,
-  1087: `url(${ cloudyImg } )`,
-  1114: `url(${ rainyImg } )`,
-  1117: `url(${ snowyImg } )`,
-  1135: `url(${ cloudyImg } )`,
-  1147: `url(${ cloudyImg } )`,
-  1150: `url(${ rainyImg } )`,
-  1153: `url(${ rainyImg } )`,
-  1168: `url(${ rainyImg } )`,
-  1171: `url(${ rainyImg } )`,
-  1180: `url(${ rainyImg } )`,
-  1183: `url(${ rainyImg } )`,
-  1186: `url(${ rainyImg } )`,
-  1189: `url(${ rainyImg } )`,
-  1192: `url(${ rainyImg } )`,
-  1195: `url(${ rainyImg } )`,
-  1198: `url(${ rainyImg } )`,
-  1201: `url(${ rainyImg } )`,
-  1204: `url(${ snowyImg } )`,
-  1207: `url(${ snowyImg } )`,
-  1210: `url(${ snowyImg } )`,
-  1213: `url(${ snowyImg } )`,
-  1216: `url(${ snowyImg } )`,
-  1219: `url(${ snowyImg } )`,
-  1222: `url(${ snowyImg } )`,
-  1225: `url(${ snowyImg } )`,
-  1237: `url(${ snowyImg } )`,
-  1240: `url(${ rainyImg } )`,
-  1243: `url(${ rainyImg } )`,
-  1246: `url(${ rainyImg } )`,
-  1249: `url(${ rainyImg } )`,
-  1252: `url(${ rainyImg } )`,
-  1255: `url(${ sunnyImg } )`,
-  1258: `url(${ sunnyImg } )`,
-  1261: `url(${ sunnyImg } )`,
-  1264: `url(${ sunnyImg } )`,
-  1273: `url(${ rainyImg } )`,
-  1276: `url(${ rainyImg } )`,
-  1279: `url(${ snowyImg } )`,
-  1282: `url(${ snowyImg } )`
+  1000: `url(${sunnyImg} )`,
+  1001: `url(${clearImg} )`,
+  1003: `url(${cloudyImg} )`,
+  1006: `url(${cloudyImg} )`,
+  1009: `url(${cloudyImg} )`,
+  1030: `url(${cloudyImg} )`,
+  1063: `url(${sunnyImg} )`,
+  1066: `url(${cloudyImg} )`,
+  1069: `url(${cloudyImg} )`,
+  1072: `url(${cloudyImg} )`,
+  1087: `url(${cloudyImg} )`,
+  1114: `url(${rainyImg} )`,
+  1117: `url(${snowyImg} )`,
+  1135: `url(${cloudyImg} )`,
+  1147: `url(${cloudyImg} )`,
+  1150: `url(${rainyImg} )`,
+  1153: `url(${rainyImg} )`,
+  1168: `url(${rainyImg} )`,
+  1171: `url(${rainyImg} )`,
+  1180: `url(${rainyImg} )`,
+  1183: `url(${rainyImg} )`,
+  1186: `url(${rainyImg} )`,
+  1189: `url(${rainyImg} )`,
+  1192: `url(${rainyImg} )`,
+  1195: `url(${rainyImg} )`,
+  1198: `url(${rainyImg} )`,
+  1201: `url(${rainyImg} )`,
+  1204: `url(${snowyImg} )`,
+  1207: `url(${snowyImg} )`,
+  1210: `url(${snowyImg} )`,
+  1213: `url(${snowyImg} )`,
+  1216: `url(${snowyImg} )`,
+  1219: `url(${snowyImg} )`,
+  1222: `url(${snowyImg} )`,
+  1225: `url(${snowyImg} )`,
+  1237: `url(${snowyImg} )`,
+  1240: `url(${rainyImg} )`,
+  1243: `url(${rainyImg} )`,
+  1246: `url(${rainyImg} )`,
+  1249: `url(${rainyImg} )`,
+  1252: `url(${rainyImg} )`,
+  1255: `url(${sunnyImg} )`,
+  1258: `url(${sunnyImg} )`,
+  1261: `url(${sunnyImg} )`,
+  1264: `url(${sunnyImg} )`,
+  1273: `url(${rainyImg} )`,
+  1276: `url(${rainyImg} )`,
+  1279: `url(${snowyImg} )`,
+  1282: `url(${snowyImg} )`,
 };
 
 function App() {
@@ -150,7 +150,6 @@ function SearchBar({ setSearchTerm }) {
 
   function commitSearchResult(result) {
     if (result === undefined) return;
-    alert('searched')
     setSearchTerm(result.url);
     document.getElementById("searchbar").value = "";
     sched = "";
@@ -162,21 +161,24 @@ function SearchBar({ setSearchTerm }) {
       return;
     }
     return (
-      <div className="resultsbg">
-        {searchResults.map((r) => {
-          return (
-            <button
-              className="result"
-              key={r.id}
-              onClick={() => {
-                commitSearchResult(r);
-              }}
-            >
-              <h3>{r.name + ", " + r.region}</h3>
-            </button>
-          );
-        })}
-      </div>
+      <>
+        <div className="resultsbg">
+          {searchResults.map((r) => {
+            return (
+              <button
+                className="result"
+                key={r.id}
+                onClick={() => {
+                  commitSearchResult(r);
+                }}
+              >
+                <h3>{r.name + ", " + r.region}</h3>
+              </button>
+            );
+          })}
+        </div>
+        <div className="unfocus" onClick={onBlur}></div>
+      </>
     );
   }
 
@@ -193,13 +195,13 @@ function SearchBar({ setSearchTerm }) {
     console.log("focused");
   };
   const onBlur = (e) => {
-    if (e.relatedTarget !== null) return;
+    // if (e.relatedTarget !== null) return;
     setFocused(false);
     console.log("un focused");
   };
   return (
     <>
-      <div className="searchBar" onBlur={onBlur} onFocus={onFocus}>
+      <div className="searchBar" onFocus={onFocus}>
         <input
           id="searchbar"
           type="text"
@@ -232,7 +234,11 @@ function Hero({ searchTerm, unit }) {
       })
       .then((response) => {
         // If its "sunny" and nighttime, set code to 1001
-        changeBG(response.current.condition.code === 1000 && response.current.is_day === 0 ? 1001 : response.current.condition.code);
+        changeBG(
+          response.current.condition.code === 1000 && response.current.is_day === 0
+            ? 1001
+            : response.current.condition.code
+        );
         console.log("hero fetch " + searchTerm);
         setCurrentTempCondition({
           searchTerm,
@@ -547,7 +553,7 @@ CFButton.propTypes = {
 
 function changeBG(code) {
   console.log(bgLookup[code]);
-  document.querySelector('html').style.backgroundImage = bgLookup[code];
+  document.querySelector("html").style.backgroundImage = bgLookup[code];
 }
 
 export default App;

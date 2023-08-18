@@ -5,7 +5,4 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: '/apple-weather-clone/',
   plugins: [react()],
-  server: {
-    host: true,
-  },
 })
