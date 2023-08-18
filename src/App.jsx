@@ -76,6 +76,12 @@ const bgLookup = {
   1282: `url(${snowyImg} )`,
 };
 
+function Copyright() {
+  return (
+    <p>Made with &lt;3 using React. <a style={{color: "white", textDecoration: "underline"}} href="https://victorl000.github.io/">VictorL000</a>, 2023.</p>
+  )
+}
+
 function App() {
   let [unit, setUnit] = useState("c");
   let [searchTerm, setSearchTerm] = useState(CITY);
@@ -85,6 +91,7 @@ function App() {
       <Hero searchTerm={searchTerm} unit={unit} />
       <HourlyForecast searchTerm={searchTerm} unit={unit}></HourlyForecast>
       <DailyForecast searchTerm={searchTerm} unit={unit}></DailyForecast>
+      <Copyright></Copyright>
     </>
   );
 }

@@ -105,7 +105,7 @@ input[type="checkbox"] {
 }
 .toggleCF label::after {
   font-size: 16px;
-  color: #000000;
+  color: #242424ee;
   font-weight: 500;
   content: "C";
   line-height: 26px;
@@ -193,7 +193,7 @@ body .temperature {
   background-color: #55555533;
   border-radius: var(--border-radius);
   padding: 6px 0px 0px;
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(14px);
 }
 
 .tooltip {
