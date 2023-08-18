@@ -2,7 +2,12 @@ import { useState } from "react";
 import "./App.css";
 import PropTypes from "prop-types";
 import clearImg from "./assets/clear.jpg"
+import sunnyImg from "./assets/sunny.jpg"
+import rainyImg from "./assets/rainy.jpg"
+import snowyImg from "./assets/snowy.jpg"
+import cloudyImg from "./assets/cloudy.jpg"
 import icon from "./assets/favicon.ico"
+import circleImg from "./assets/circle.svg"
 
 const FORECASTDAYS = 7;
 const CITY = "toronto-ontario-canada";
@@ -17,59 +22,58 @@ function convert24to12(time) {
       <span className="ampm">{time < 12 ? "AM" : "PM"}</span>
     </>
   );
-  // return (time % 12) + "" +
 }
 
 const bgLookup = {
-  1000: 'url(/src/assets/sunny.jpg)',
-  1001: 'url(' + clearImg + ')',
-  1003: 'url(/src/assets/cloudy.jpg)',
-  1006: 'url(/src/assets/cloudy.jpg)',
-  1009: 'url(/src/assets/cloudy.jpg)',
-  1030: 'url(/src/assets/cloudy.jpg)',
-  1063: 'url(/src/assets/sunny.jpg)',
-  1066: 'url(/src/assets/cloudy.jpg)',
-  1069: 'url(/src/assets/cloudy.jpg)',
-  1072: 'url(/src/assets/cloudy.jpg)',
-  1087: 'url(/src/assets/cloudy.jpg)',
-  1114: 'url(/src/assets/rainy.jpg)',
-  1117: 'url(/src/assets/snowy.jpg)',
-  1135: 'url(/src/assets/cloudy.jpg)',
-  1147: 'url(/src/assets/cloudy.jpg)',
-  1150: 'url(/src/assets/rainy.jpg)',
-  1153: 'url(/src/assets/rainy.jpg)',
-  1168: 'url(/src/assets/rainy.jpg)',
-  1171: 'url(/src/assets/rainy.jpg)',
-  1180: 'url(/src/assets/rainy.jpg)',
-  1183: 'url(/src/assets/rainy.jpg)',
-  1186: 'url(/src/assets/rainy.jpg)',
-  1189: 'url(/src/assets/rainy.jpg)',
-  1192: 'url(/src/assets/rainy.jpg)',
-  1195: 'url(/src/assets/rainy.jpg)',
-  1198: 'url(/src/assets/rainy.jpg)',
-  1201: 'url(/src/assets/rainy.jpg)',
-  1204: 'url(/src/assets/snowy.jpg)',
-  1207: 'url(/src/assets/snowy.jpg)',
-  1210: 'url(/src/assets/snowy.jpg)',
-  1213: 'url(/src/assets/snowy.jpg)',
-  1216: 'url(/src/assets/snowy.jpg)',
-  1219: 'url(/src/assets/snowy.jpg)',
-  1222: 'url(/src/assets/snowy.jpg)',
-  1225: 'url(/src/assets/snowy.jpg)',
-  1237: 'url(/src/assets/snowy.jpg)',
-  1240: 'url(/src/assets/rainy.jpg)',
-  1243: 'url(/src/assets/rainy.jpg)',
-  1246: 'url(/src/assets/rainy.jpg)',
-  1249: 'url(/src/assets/rainy.jpg)',
-  1252: 'url(/src/assets/rainy.jpg)',
-  1255: 'url(/src/assets/sunny.jpg)',
-  1258: 'url(/src/assets/sunny.jpg)',
-  1261: 'url(/src/assets/sunny.jpg)',
-  1264: 'url(/src/assets/sunny.jpg)',
-  1273: 'url(/src/assets/rainy.jpg)',
-  1276: 'url(/src/assets/rainy.jpg)',
-  1279: 'url(/src/assets/snowy.jpg)',
-  1282: 'url(/src/assets/snowy.jpg)'
+  1000: `url(${ sunnyImg } )`,
+  1001: `url(${ clearImg } )`,
+  1003: `url(${ cloudyImg } )`,
+  1006: `url(${ cloudyImg } )`,
+  1009: `url(${ cloudyImg } )`,
+  1030: `url(${ cloudyImg } )`,
+  1063: `url(${ sunnyImg } )`,
+  1066: `url(${ cloudyImg } )`,
+  1069: `url(${ cloudyImg } )`,
+  1072: `url(${ cloudyImg } )`,
+  1087: `url(${ cloudyImg } )`,
+  1114: `url(${ rainyImg } )`,
+  1117: `url(${ snowyImg } )`,
+  1135: `url(${ cloudyImg } )`,
+  1147: `url(${ cloudyImg } )`,
+  1150: `url(${ rainyImg } )`,
+  1153: `url(${ rainyImg } )`,
+  1168: `url(${ rainyImg } )`,
+  1171: `url(${ rainyImg } )`,
+  1180: `url(${ rainyImg } )`,
+  1183: `url(${ rainyImg } )`,
+  1186: `url(${ rainyImg } )`,
+  1189: `url(${ rainyImg } )`,
+  1192: `url(${ rainyImg } )`,
+  1195: `url(${ rainyImg } )`,
+  1198: `url(${ rainyImg } )`,
+  1201: `url(${ rainyImg } )`,
+  1204: `url(${ snowyImg } )`,
+  1207: `url(${ snowyImg } )`,
+  1210: `url(${ snowyImg } )`,
+  1213: `url(${ snowyImg } )`,
+  1216: `url(${ snowyImg } )`,
+  1219: `url(${ snowyImg } )`,
+  1222: `url(${ snowyImg } )`,
+  1225: `url(${ snowyImg } )`,
+  1237: `url(${ snowyImg } )`,
+  1240: `url(${ rainyImg } )`,
+  1243: `url(${ rainyImg } )`,
+  1246: `url(${ rainyImg } )`,
+  1249: `url(${ rainyImg } )`,
+  1252: `url(${ rainyImg } )`,
+  1255: `url(${ sunnyImg } )`,
+  1258: `url(${ sunnyImg } )`,
+  1261: `url(${ sunnyImg } )`,
+  1264: `url(${ sunnyImg } )`,
+  1273: `url(${ rainyImg } )`,
+  1276: `url(${ rainyImg } )`,
+  1279: `url(${ snowyImg } )`,
+  1282: `url(${ snowyImg } )`
 };
 
 function App() {
@@ -146,6 +150,7 @@ function SearchBar({ setSearchTerm }) {
 
   function commitSearchResult(result) {
     if (result === undefined) return;
+    alert('searched')
     setSearchTerm(result.url);
     document.getElementById("searchbar").value = "";
     sched = "";
@@ -470,7 +475,7 @@ function DailyModule(props) {
           >
             {props.weather.date === "Today" ? (
               <div className="curTempIconContainer" style={{ left: `${iconLeftPercent}%` }}>
-                <img src="/src/assets/circle.svg" alt="" />
+                <img src={circleImg} alt="" />
               </div>
             ) : (
               ""
