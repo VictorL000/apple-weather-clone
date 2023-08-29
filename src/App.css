@@ -444,9 +444,13 @@ body .temperature {
   color: white;
 }
 
+#searchbar:hover {
+  outline: none;
+  background-color: #00000035;
+}
 #searchbar:focus-visible {
   outline: none;
-  background-color: #00000044;
+  background-color: #0000004b;
 }
 
 .searchBar input {
