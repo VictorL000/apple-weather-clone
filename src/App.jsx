@@ -78,8 +78,12 @@ const bgLookup = {
 
 function Copyright() {
   return (
-    <p>Made with &lt;3 using React. <a style={{color: "white", textDecoration: "underline"}} href="https://victorl000.github.io/">VictorL000</a>, 2023.</p>
-  )
+    <p className="copyright">
+      Made with &lt;3 using <a href="https://react.dev/">React</a> and{" "}
+      <a href="https://www.weatherapi.com/">WeatherAPI.com</a>.{" "}
+      <a href="https://victorl000.github.io/">VictorL000</a>, 2023.
+    </p>
+  );
 }
 
 function App() {
@@ -470,6 +474,9 @@ function DailyModule(props) {
     (100 * (props.weather.temp_c - props.weather.weekLow_c)) /
     (props.weather.weekHigh_c - props.weather.weekLow_c);
 
+  let weatherBarGradWidthPercent = 100 * 80 / (props.weather.high_c - props.weather.low_c);
+  let weatherBarGradLeftPercent = -( ( props.weather.low_c + 40 ) / 10 ) * 100;
+  console.log(weatherBarGradLeftPercent);
   return (
     <div className="dayModule">
       <h3>{props.weather.date}</h3>
@@ -486,6 +493,11 @@ function DailyModule(props) {
               left: `${weatherBarLeftPercent}%`,
             }}
           >
+            <div className="weatherBarInnerGradient"
+            style={{
+              width: `${weatherBarGradWidthPercent}%`,
+              left: `${weatherBarGradLeftPercent}%`,
+            }}></div>
             {props.weather.date === "Today" ? (
               <div className="curTempIconContainer" style={{ left: `${iconLeftPercent}%` }}>
                 <img src={circleImg} alt="" />

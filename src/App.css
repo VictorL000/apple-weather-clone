@@ -80,6 +80,7 @@ html {
   height: 54px;
   position: absolute;
   backdrop-filter: blur(6px);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 10px;
 }
 
 .toggleCF {
@@ -96,16 +97,17 @@ input[type="checkbox"] {
   cursor: pointer;
   width: 56px;
   height: 32px;
-  background: #999999bb;
+  background: #8a8f9078;
   display: block;
   border-radius: 100px;
   position: relative;
   color: #ffffff00;
   font-size: 0px;
 }
+
 .toggleCF label::after {
   font-size: 16px;
-  color: #242424ee;
+  color: #ffffff;
   font-weight: 500;
   content: "C";
   line-height: 26px;
@@ -115,14 +117,14 @@ input[type="checkbox"] {
   left: 3px;
   width: 26px;
   height: 26px;
-  background: #fff;
+  background: #c5c5c5ba;
   border-radius: 48px;
   transition: 0.3s;
 }
 
-input:checked + label {
-  background: #999999bb;
-}
+/* input:checked + label {
+  background: #c5c5c58a;
+} */
 
 input:checked + :after {
   content: "F";
@@ -148,7 +150,7 @@ input:checked + :after {
 
 .hero {
   margin: 60px;
-  text-shadow: 3px 3px 12px #00000063;
+  text-shadow: rgba(0, 0, 0, 0.16) 0px 2px 8px;
 }
 
 .hero h1,
@@ -194,6 +196,7 @@ body .temperature {
   border-radius: var(--border-radius);
   padding: 6px 0px 0px;
   backdrop-filter: blur(14px);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 10px;
 }
 
 .tooltip {
@@ -269,6 +272,7 @@ body .temperature {
   margin: 15px auto 45px;
   padding: 6px 0px 8px;
   backdrop-filter: blur(6px);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 10px;
 }
 
 .dailyForecast {
@@ -333,10 +337,22 @@ body .temperature {
 }
 
 .weatherBarInner {
-  background-color: bisque;
+  /* background-color: bisque; */
   height: 100%;
   border-radius: 100px;
   position: relative;
+  overflow: hidden;
+  display: grid;
+}
+
+.weatherBarInnerGradient {
+  background: rgb(28,18,203);
+  background: linear-gradient(90deg, rgba(28,18,203,1) 0%, rgba(69,218,222,1) 44%, rgba(233,188,23,1) 83%, rgba(255,76,0,1) 100%);
+
+
+  height: 100%;
+  position: relative;
+  grid-area: 1/1;
 }
 
 .curTempIconContainer {
@@ -346,29 +362,48 @@ body .temperature {
   justify-content: center;
   align-items: center;
   position: relative;
+  grid-area: 1/1;
 }
 
 .curTempIconContainer img {
-  height: 14px;
-  width: 14px;
+  height: 16px;
+  width: auto;
 }
 
 .resultsbg {
   z-index: 1;
   position: relative;
-  background-color: #555555f3;
-  border-radius: 6px;
+  background-color: #55555533;
+  border-radius: 15px;
+  backdrop-filter: blur(6px);
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 2px 10px;
 }
 
 .result {
   width: 100%;
   text-align: left;
+  border-radius: 0;
+}
+
+.result:first-child {
+  border-radius: 15px 15px 0px 0px;
+}
+.result:last-child {
+  border-radius: 0px 0px 15px 15px;
+}
+.result:only-child {
+  border-radius: 15px 15px 15px 15px;
 }
 
 .result h3 {
   font-size: 20px;
   font-weight: 400;
   letter-spacing: -0.7px;
+}
+
+.result:hover {
+  border: white 1px solid;
+  background-color: #00000011;
 }
 
 .searchBar {
@@ -400,6 +435,18 @@ body .temperature {
   padding-right: 30px;
   background-position: right;
   background-position-x: calc(100% - 7px);
+  backdrop-filter: blur(12px);
+  transition: background-color 0.11s ease-out;
+}
+
+#searchbar::placeholder,
+#searchbar {
+  color: white;
+}
+
+#searchbar:focus-visible {
+  outline: none;
+  background-color: #00000044;
 }
 
 .searchBar input {
@@ -411,7 +458,7 @@ body .temperature {
 
 .searchBar button {
   height: 100%;
-  background-color: #ffffff00;
+  background-color: #00000000;
   display: flex;
   align-items: center;
 }
@@ -425,4 +472,10 @@ body .temperature {
 .ampm {
   font-size: 1.125rem;
   font-size: clamp(1.125rem, 0.75rem + 1.6666666666666667vw, 1.6875rem);
+}
+
+.copyright a {
+  color: white;
+  text-decoration: underline;
+  transition: color 0.11s ease-out;
 }
