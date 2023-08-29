@@ -439,18 +439,20 @@ body .temperature {
   transition: background-color 0.11s ease-out;
 }
 
-#searchbar::placeholder,
+#searchbar::placeholder{
+  color: #ffffff99;
+}
 #searchbar {
   color: white;
 }
 
 #searchbar:hover {
   outline: none;
-  background-color: #00000035;
+  background-color: #00000044;
 }
 #searchbar:focus-visible {
   outline: none;
-  background-color: #0000004b;
+  background-color: #00000044;
 }
 
 .searchBar input {
