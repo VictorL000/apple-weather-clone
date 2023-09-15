@@ -437,7 +437,7 @@ function DailyForecast({ searchTerm, unit }) {
   return (
     <div className="dailyForecastContainer">
       <div className="tooltip">
-        <h4>8-DAY FORECAST</h4>
+        <h4>7-DAY FORECAST</h4>
       </div>
       <div className="dailyForecast">
         {dayModules.map((mod) => (
