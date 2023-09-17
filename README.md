@@ -1,4 +1,4 @@
-# Apple Weather Clone
+# Appol Weather - an Apple Weather Clone
 Made using React and WeatherAPI.com.
 
 Supports:
